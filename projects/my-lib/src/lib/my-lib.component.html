@@ -1,7 +1,7 @@
 <div class="search-module">
     <form>
         <input class="form-control" type="text" name="searchedText" [(ngModel)]="searchedText"
-            (ngModelChange)="onInputChange()" placeholder="SEARCH HERE...">
+            (ngModelChange)="onInputChange()" placeholder="Search Text Here...">
         <div class="loader" *ngIf="isLoading"></div>
     </form>
     <div class="search-result" *ngIf="searchResponse?.categories?.length || searchResponse?.experiences?.length || searchResponse?.hosts?.length">
