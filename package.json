@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "postinstall": "move ./dist/* ./ && rmdir ./dist"
+    "postinstall": "move ./dist/*.* ./ && rmdir ./dist"
   },
   "dependencies": {
     "@angular/animations": "~12.1.0-",
