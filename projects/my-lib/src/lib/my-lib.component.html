@@ -1,0 +1,92 @@
+<div class="search-module">
+    <form>
+        <input class="form-control" type="text" name="searchedText" [(ngModel)]="searchedText"
+            (ngModelChange)="onInputChange()" placeholder="Search here...">
+        <div class="loader" *ngIf="isLoading"></div>
+    </form>
+    <div class="search-result" *ngIf="searchResponse?.categories?.length || searchResponse?.experiences?.length || searchResponse?.hosts?.length">
+        <div class="search-result__head">
+            <div class="search-result__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M10.5281 9.42808H11.2135L15.5 13.7135L14.2146 15L9.92923 10.7135V10.0281L9.67077 9.77077C8.72808 10.6281 7.44269 11.1427 6.07077 11.1427C2.98538 11.1427 0.5 8.65731 0.5 5.57077C0.5 2.48538 2.98538 0 6.07077 0C9.15615 0 11.6415 2.48538 11.6415 5.57077C11.6415 6.94269 11.1281 8.22808 10.2719 9.17077L10.5281 9.42808ZM6.07077 1.71346C3.92808 1.71346 2.21346 3.42923 2.21346 5.57077C2.21346 7.71462 3.92808 9.42808 6.07077 9.42808C8.21346 9.42808 9.92923 7.71462 9.92923 5.57077C9.92923 3.42923 8.21346 1.71346 6.07077 1.71346Z"
+                        fill="url(#paint0_linear)" />
+                    <defs>
+                        <linearGradient id="paint0_linear" x1="0.5" y1="7.49981" x2="15.5" y2="7.49981"
+                            gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#FF7A59" />
+                            <stop offset="1" stop-color="#EF6340" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <div class="search-result__title">Search results for <strong>‘{{searchedText}}’</strong></div>
+        </div>
+        <div class="search-result__block search-result__block--scrolling" *ngIf="searchResponse?.categories?.length">
+            <div class="search-result__block-heading">
+                <h3 class="search-result__block-title">categories and interests</h3>
+            </div>
+            <ul class="search-result__block-list">
+                <li *ngFor="let category of searchResponse.categories">
+                    <a (click)="navigateToLink(category.link)" [innerHtml]="category.title"></a>
+                </li>
+            </ul>
+        </div>
+        <div class="search-result__block" *ngIf="searchResponse?.experiences?.length">
+            <div class="search-result__block-heading">
+                <h3 class="search-result__block-title">experiences</h3>
+                <a href="#">Show more results</a>
+            </div>
+            <ul class="search-result__block-list">
+                <li *ngFor="let experience of searchResponse.experiences">
+                    <a (click)="navigateToLink(experience.link)">
+                        <div class="search-list-block search-list-block--blog">
+                            <div class="search-list-block__img"
+                                [style.backgroundImage]="'url('+ experience?.img_url +')'">
+                            </div>
+                            <div class="search-list-block__info">
+                                <h3 class="search-list-block__title" [innerHtml]="experience?.title"></h3>
+                                <div class="search-list-block__content">{{experience?.location}}
+                                    <span class="search-list-block__date">
+                                        <svg width="12" height="13" viewBox="0 0 12 13" fill="#424242"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M2.5 0.423462V1.59013H1.91667C1.275 1.59013 0.75 2.11513 0.75 2.7568V10.9235C0.75 11.5651 1.275 12.0901 1.91667 12.0901H10.0833C10.725 12.0901 11.25 11.5651 11.25 10.9235V2.7568C11.25 2.11513 10.725 1.59013 10.0833 1.59013H9.5V0.423462H8.33333V1.59013H3.66667V0.423462H2.5ZM1.91667 2.7568H2.5H3.66667H8.33333H9.5H10.0833V3.92346H1.91667V2.7568ZM1.91667 5.09013H10.0833V10.9235H1.91667V5.09013Z"
+                                                fill="#424242" />
+                                            <defs>
+                                                <linearGradient id="paint0_linear" x1="0.75" y1="6.25668" x2="12.8466"
+                                                    y2="6.25668" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#606164" />
+                                                    <stop offset="1" stop-color="#424242" />
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <!-- <img src="../../assets/calendar.png" /> -->
+                                        {{ experience.date | date:'fullDate' }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="search-result__block search-result__block--scrolling" *ngIf="searchResponse?.hosts?.length">
+            <div class="search-result__block-heading">
+                <h3 class="search-result__block-title">host</h3>
+            </div>
+            <ul class="search-result__block-list">
+                <li *ngFor="let host of searchResponse.hosts">
+                    <a (click)="navigateToLink(host.link)">
+                        <div class="search-list-block">
+                            <div class="search-list-block__img" [style.backgroundImage]="'url('+ host?.img_url +')'">
+                            </div>
+                            <div class="search-list-block__info">
+                                <h3 class="search-list-block__title" [innerHtml]="host?.title"></h3>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
