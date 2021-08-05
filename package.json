@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "postinstall": "mv ./dist/* ./ && rmdir ./dist"
   },
   "dependencies": {
     "@angular/animations": "~12.1.0-",
