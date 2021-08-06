@@ -1,10 +1,30 @@
 <div class="search-module">
     <form>
         <input class="form-control" type="text" name="searchedText" [(ngModel)]="searchedText"
-            (ngModelChange)="onInputChange()" placeholder="Search...">
+            (ngModelChange)="onInputChange()" placeholder="Search by event or host name">
+        <button *ngIf="type === 'web'" (click)="onSearch()" type="button" class="search-btn">
+            <div class="search-icon-text">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M10.5281 9.42808H11.2135L15.5 13.7135L14.2146 15L9.92923 10.7135V10.0281L9.67077 9.77077C8.72808 10.6281 7.44269 11.1427 6.07077 11.1427C2.98538 11.1427 0.5 8.65731 0.5 5.57077C0.5 2.48538 2.98538 0 6.07077 0C9.15615 0 11.6415 2.48538 11.6415 5.57077C11.6415 6.94269 11.1281 8.22808 10.2719 9.17077L10.5281 9.42808ZM6.07077 1.71346C3.92808 1.71346 2.21346 3.42923 2.21346 5.57077C2.21346 7.71462 3.92808 9.42808 6.07077 9.42808C8.21346 9.42808 9.92923 7.71462 9.92923 5.57077C9.92923 3.42923 8.21346 1.71346 6.07077 1.71346Z"
+                            fill="url(#paint0_linear)" />
+                        <defs>
+                            <linearGradient id="paint0_linear" x1="0.5" y1="7.49981" x2="15.5" y2="7.49981"
+                                gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#FFFFFF" />
+                                <stop offset="1" stop-color="#FFFFFF" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                Search
+            </div>
+        </button>
         <div class="loader" *ngIf="isLoading"></div>
     </form>
-    <div class="search-result" *ngIf="searchResponse?.categories?.length || searchResponse?.experiences?.length || searchResponse?.hosts?.length">
+    <div class="search-result"
+        *ngIf="searchResponse?.categories?.length || searchResponse?.experiences?.length || searchResponse?.hosts?.length">
         <div class="search-result__head">
             <div class="search-result__icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">

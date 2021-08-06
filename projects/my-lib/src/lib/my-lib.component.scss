@@ -80,8 +80,6 @@
         &--scrolling{
             padding-right: 8px;
             .search-result__block-list{
-                max-height: 200px;
-                overflow-y: scroll;
                 li{
                     padding: 0 8px 0 0;
                 }
@@ -108,6 +106,7 @@
 .search-list-block{
     display: flex;
     align-items: center;
+    cursor: pointer;
     &__img{
         height: 32px;
         width: 32px;
@@ -160,9 +159,28 @@
     }
 }
 
+.search-icon-text{
+    display: flex;
+    color: #FFFFFF;
+    svg {
+        margin-right: 5px;
+    }
+}
+
+.search-btn {
+    padding: 10px;
+    background-color: #EF6340;
+    border: none;
+    border-radius: 2px;
+    margin-left: 2px;
+}
+
 /* loader css*/
 form {
     display: flex;
+    .form-control {
+        min-width: 200px;
+    }
 }
 .loader {
     border: 3px solid #f3f3f3;

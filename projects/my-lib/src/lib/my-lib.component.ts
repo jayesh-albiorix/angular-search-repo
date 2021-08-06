@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -12,22 +12,32 @@ export class MyLibComponent implements OnInit {
   timer: any = null;
   searchResponse: any = {};
   isLoading: boolean = false;
+  @Input() type: string = '';
+
   constructor(
     private httpClient: HttpClient
   ) { }
 
   ngOnInit(): void {
   }
-  
+
   /**
-  * Function Execute when user type something in text input after timeout of 500
-  */
+   * Function Execute when user type something in text input after timeout of 500
+   */
   onInputChange() {
-    if (this.searchedText) {
+    if (this.searchedText && this.type !== 'web') {
       clearTimeout(this.timer);
       this.timer = setTimeout(() => {
         this.makeAPICall()
       }, 500)
+    } else {
+      this.searchResponse = {};
+    }
+  }
+
+  onSearch() {
+    if (this.searchedText) {
+      this.makeAPICall();
     } else {
       this.searchResponse = {};
     }
@@ -45,17 +55,17 @@ export class MyLibComponent implements OnInit {
         let replaceWord = new RegExp(this.searchedText, "gi");
         if (this.searchResponse?.categories?.length) {
           this.searchResponse.categories.map((category: any) => {
-            category.title = category.title.replace(replaceWord, (str: any) => `<strong>${str}</strong>`)
+            category.title = category.title.replace(replaceWord, (str: string) => `<strong>${str}</strong>`)
           });
         }
         if (this.searchResponse?.experiences?.length) {
           this.searchResponse.experiences.map((experience: any) => {
-            experience.title = experience.title.replace(replaceWord, (str: any) => `<strong>${str}</strong>`)
+            experience.title = experience.title.replace(replaceWord, (str:string) => `<strong>${str}</strong>`)
           });
         }
         if (this.searchResponse?.hosts?.length) {
-          this.searchResponse.hosts.map((host: any) => {
-            host.title = host.title.replace(replaceWord, (str: any) => `<strong>${str}</strong>`)
+          this.searchResponse.hosts.map((host:any) => {
+            host.title = host.title.replace(replaceWord, (str:string) => `<strong>${str}</strong>`)
           });
         }
         this.isLoading = false

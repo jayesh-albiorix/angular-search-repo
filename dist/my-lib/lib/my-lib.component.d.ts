@@ -8,12 +8,14 @@ export declare class MyLibComponent implements OnInit {
     timer: any;
     searchResponse: any;
     isLoading: boolean;
+    type: string;
     constructor(httpClient: HttpClient);
     ngOnInit(): void;
     /**
-    * Function Execute when user type something in text input after timeout of 500
-    */
+     * Function Execute when user type something in text input after timeout of 500
+     */
     onInputChange(): void;
+    onSearch(): void;
     /**
      * Function that fetch records from server and modify that for highlight searched word
      */
@@ -24,5 +26,5 @@ export declare class MyLibComponent implements OnInit {
      */
     navigateToLink(url: string): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<MyLibComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<MyLibComponent, "my-angular-search", never, {}, {}, never, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<MyLibComponent, "my-angular-search", never, { "type": "type"; }, {}, never, never>;
 }
