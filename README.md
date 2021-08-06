@@ -1,14 +1,39 @@
+# installation 
+
+```
+{
+  "name": "xxx",
+  "version": "x.x.x",
+  "scripts": {
+   ...
+  },
+  "dependencies": {
+    ...
+    "angular-search-2": "https://github.com/jayesh-albiorix/angular-search-2"
+  },
+  "devDependencies": {
+        ...
+  }
+}
+
+```
+
 # Usage
 
-add import in app.module.ts
+Import MyLibModule in in the root module(AppModule):
 
-import { MyLibModule } from 'my-angular-search';
+```
+import { MyLibModule } from 'angular-search-2';
+
 @NgModule({
   imports: [
       ...modules,
     MyLibModule
 })
 
-then
+```
+then in html file
 
-`<lib-my-lib></lib-my-lib>`
+```
+<my-angular-search></my-angular-search>
+```
